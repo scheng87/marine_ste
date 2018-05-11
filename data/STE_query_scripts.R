@@ -10,13 +10,13 @@ library(d3Network)
 library(treemap)
 library(maptools)
 
-setwd("~/Documents/github/marine_ste/")
-map_data_final <- readRDS("data/map_data_final_4_24.rds")
-load("data/STE_Evidence_Map_2_10_2018.RData")
+# setwd("~/Documents/github/marine_ste/")
+# map_data_final <- readRDS("data/map_data_final_4_24.rds")
+# load("data/STE_Evidence_Map_2_10_2018.RData")
 
-data <- map_data_final
+data <- extdata
+
 out_type <- c("Economic well-being","Health","Political empowerment","Social capital","Education","Culture")
-
 int_type <- c("MPA","PES","CBNRM","Certification")
 
 io_counts = matrix(nrow=6, ncol=4)
