@@ -295,7 +295,7 @@ dev.off()
 ##for CBNRM
 syn <- filter(cbnrm_outcomes,STE_domain == "Synergy") %>% arrange(Out_type,aid)
 tradeoff <- filter(cbnrm_outcomes,STE_domain == "Tradeoff") %>% arrange(Out_type,aid)
-pos_neu <- filter(cbnrm_outcomes,STE_domain == "Pos/neutral")
+both <- filter(cbnrm_outcomes,STE_domain == "Both")
 
 #Create input for tradeoffs
 aid <- as.list(unique(tradeoff$aid))
@@ -348,6 +348,32 @@ counts2 <- count(links2,source,target)
 colnames(counts2) <- c("source","target","value") 
 counts2 <- as.data.frame(counts2)
 
+##For both
+
+aid3 <- as.list(unique(syn$aid))
+
+links3 <- matrix(nrow=1,ncol=3)
+colnames(links3) <- c("source","target","aid")
+links3 <- as.data.frame(links3)
+
+for(i in aid3){
+  sub <- filter(syn, aid == i)
+  if(nrow(sub) > 1){
+    sub3 <- as.data.frame(t(combn(sub$Out_type, 2)))
+    colnames(sub3) <- c("source","target")
+    sub3$aid <- c(i)
+    links3 <- bind_rows(links3,sub3)
+  } else 
+    links3
+}
+
+links3 <- slice(links3,-1)
+
+##Count links 
+counts3 <- count(links3,source,target)
+colnames(counts3) <- c("source","target","value") 
+counts3 <- as.data.frame(counts3)
+
 grid.col <- c("Economic well-being"="#66c2a5","Social capital"="#fc8d62", "Culture"="#8da0cb", "Political empowerment"="#e78ac3","Education"="#a6d854","Health"="#ffd92f")
 pdf(file="STE by Domain - CBNRM_4_24.pdf",width=11,height=8.5)
 par(mfrow=c(1,2),oma=c(0,0,2,0))
@@ -355,6 +381,8 @@ chordDiagram(as.data.frame(counts), transparency = 0.3, grid.col=grid.col)
 title("Tradeoffs (n=8 articles, x=18 cases)",line=-3.5)
 chordDiagram(as.data.frame(counts2), transparency = 0.3, grid.col=grid.col)
 title("Synergies (n=8 articles, x=21 cases)",line=-3.5)
+chordDiagram(as.data.frame(counts3), transparency = 0.3, grid.col=grid.col)
+title("Both (n=8 articles, x=21 cases)",line=-3.5)
 mtext("STE by outcome domain type in CBNRM",outer=TRUE,cex=1.5)
 dev.off()
 
