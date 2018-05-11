@@ -1,0 +1,13 @@
+name: forest_poverty_lite
+title: forest_poverty_lite
+username:
+account: scheng
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 221385
+bundleId: 1048546
+url: https://scheng.shinyapps.io/forest_poverty_lite/
+when: 1509128956.55823
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: Interventions_Outcomes_PROFOR_no_sys_rev_Heatmap.pdf|data/.DS_Store|data/.gitignore|data/~$Data_Final_PROFOR.xlsx|data/Data_Final_PROFOR_10_2.csv|data/Data_Final_PROFOR_10_9.csv|data/Data_Final_PROFOR_new.csv|data/Data_Final_PROFOR.csv|data/Data_Final_PROFOR.xlsx|data/evidence_based_PROFOR.R|data/map_data_generation.R

@@ -1,0 +1,15 @@
+Int_type,Int_label,Int_group,Out_type,Out_label,out_group
+for_mgmt,Forest management,Productivity,mon_dir,Monetary forest income—direct sale of goods ,Forest income/consumption
+agrofor,Agroforestry,Productivity,mon_val,Monetary forest income—wage labor ,Forest income/consumption
+hab_mgmt,Habitat management,Productivity,mon_wage,Monetary forest income—value addition/entrepreneur- ship ,Forest income/consumption
+gov,Governance,Rights,phys_cons,Physical forest income—consumption ,Forest income/consumption
+emp,Individual rights/empowerment,Rights,fin_cap,"Financial capital—credit, savings and debt ",Capital/assets
+prod_cap,Produced capital,Investments,nat_for,"Natural capital—forest assets with access/use, sale and exclusion rights ",Capital/assets
+hum_cap,Human capital,Investments,nat_land,"Natural capital—land assets with access/use, sale and exclusion rights ",Capital/assets
+soc_cap,Social capital,Investments,phys_cap,Physical capital—forest-based material assets Human capital—forest-based knowledge and skills Health ,Capital/assets
+liv_alt,Linked enterprises & livelihood alternatives,Markets,hum_cap,Human capital—forest-based knowledge and skills Health ,Capital/assets
+market,Identifying and strengthening market forces,Markets,health,Health,Capital/assets
+mark_acc,Increasing access to markets,Markets,soc_cap,"Social capital (including inequality, con ict, and empowerment of women and marginalized groups) ",Capital/assets
+eco_ser,Managing and enhancing ecosys- tem services ,Ecosystems,,,
+instit,Strengthening institutions and markets,Ecosystems,,,
+non_mon,Identifying non-monetary bene ts ,Ecosystems,,,

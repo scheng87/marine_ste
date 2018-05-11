@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body> 
+ <style>
+.link {
+stroke: #666;
+opacity: 0.9;
+stroke-width: 1.5px;
+}
+.node circle {
+stroke: #fff;
+opacity: 0.9;
+stroke-width: 1.5px;
+}
+.node:not(:hover) .nodetext {
+display: none;
+}
+text {
+font: 7px serif;
+opacity: 0.9;
+pointer-events: none;
+}
+</style>
+
+<script src=http://d3js.org/d3.v3.min.js></script>
+
+<script> 
+ var links = [ { "source" : 0, "target" : 3, "value" : 1 }, { "source" : 0, "target" : 4, "value" : 2 }, { "source" : 1, "target" : 0, "value" : 2 }, { "source" : 1, "target" : 1, "value" : 6 }, { "source" : 1, "target" : 2, "value" : 7 }, { "source" : 1, "target" : 3, "value" : 10 }, { "source" : 1, "target" : 4, "value" : 15 }, { "source" : 1, "target" : 5, "value" : 10 }, { "source" : 2, "target" : 1, "value" : 6 }, { "source" : 2, "target" : 2, "value" : 2 }, { "source" : 2, "target" : 3, "value" : 1 }, { "source" : 2, "target" : 4, "value" : 7 }, { "source" : 2, "target" : 5, "value" : 7 }, { "source" : 3, "target" : 0, "value" : 1 }, { "source" : 3, "target" : 1, "value" : 5 }, { "source" : 3, "target" : 2, "value" : 3 }, { "source" : 3, "target" : 3, "value" : 6 }, { "source" : 3, "target" : 4, "value" : 9 }, { "source" : 3, "target" : 5, "value" : 6 }, { "source" : 4, "target" : 0, "value" : 2 }, { "source" : 4, "target" : 1, "value" : 12 }, { "source" : 4, "target" : 2, "value" : 3 }, { "source" : 4, "target" : 3, "value" : 12 }, { "source" : 4, "target" : 4, "value" : 9 }, { "source" : 4, "target" : 5, "value" : 13 }, { "source" : 5, "target" : 0, "value" : 2 }, { "source" : 5, "target" : 1, "value" : 4 }, { "source" : 5, "target" : 2, "value" : 3 }, { "source" : 5, "target" : 3, "value" : 7 }, { "source" : 5, "target" : 4, "value" : 12 }, { "source" : 5, "target" : 5, "value" : 6 } ] ; 
+ var nodes = [ { "name" : 67201, "group" : "Political empowerment" }, { "name" : 67201, "group" : "Economic well-being" }, { "name" : 67201, "group" : "Health" }, { "name" : 67306, "group" : "Political empowerment" }, { "name" : 67306, "group" : "Economic well-being" }, { "name" : 67306, "group" : "Political empowerment" }, { "name" : 67406, "group" : "Economic well-being" }, { "name" : 67406, "group" : "Health" }, { "name" : 67550, "group" : "Political empowerment" }, { "name" : 67550, "group" : "Social capital" }, { "name" : 67550, "group" : "Political empowerment" }, { "name" : 67550, "group" : "Social capital" }, { "name" : 67605, "group" : "Social capital" }, { "name" : 67606, "group" : "Economic well-being" }, { "name" : 67606, "group" : "Health" }, { "name" : 67606, "group" : "Political empowerment" }, { "name" : 67666, "group" : "Economic well-being" }, { "name" : 67666, "group" : "Education" }, { "name" : 67666, "group" : "Social capital" }, { "name" : 67666, "group" : "Political empowerment" }, { "name" : 67672, "group" : "Education" }, { "name" : 67672, "group" : "Economic well-being" }, { "name" : 67672, "group" : "Political empowerment" }, { "name" : 67672, "group" : "Social capital" }, { "name" : 67672, "group" : "Education" }, { "name" : 67672, "group" : "Economic well-being" }, { "name" : 67672, "group" : "Political empowerment" }, { "name" : 67672, "group" : "Social capital" }, { "name" : 67689, "group" : "Economic well-being" }, { "name" : 67689, "group" : "Political empowerment" }, { "name" : 67689, "group" : "Culture" }, { "name" : 67689, "group" : "Health" }, { "name" : 67689, "group" : "Political empowerment" }, { "name" : 67709, "group" : "Economic well-being" }, { "name" : 67709, "group" : "Political empowerment" }, { "name" : 67709, "group" : "Health" }, { "name" : 67751, "group" : "Economic well-being" }, { "name" : 67751, "group" : "Political empowerment" }, { "name" : 67751, "group" : "Social capital" }, { "name" : 67751, "group" : "Education" }, { "name" : 67805, "group" : "Political empowerment" }, { "name" : 67805, "group" : "Health" }, { "name" : 67805, "group" : "Economic well-being" }, { "name" : 67805, "group" : "Political empowerment" }, { "name" : 67805, "group" : "Health" }, { "name" : 67805, "group" : "Economic well-being" }, { "name" : 68040, "group" : "Political empowerment" }, { "name" : 68040, "group" : "Political empowerment" }, { "name" : 68040, "group" : "Economic well-being" }, { "name" : 68042, "group" : "Economic well-being" }, { "name" : 68042, "group" : "Social capital" }, { "name" : 68059, "group" : "Health" }, { "name" : 68059, "group" : "Social capital" }, { "name" : 68059, "group" : "Health" }, { "name" : 68059, "group" : "Political empowerment" }, { "name" : 68128, "group" : "Health" }, { "name" : 68128, "group" : "Social capital" }, { "name" : 68128, "group" : "Economic well-being" }, { "name" : 68128, "group" : "Health" }, { "name" : 68238, "group" : "Social capital" }, { "name" : 68238, "group" : "Political empowerment" }, { "name" : 68238, "group" : "Economic well-being" }, { "name" : 68437, "group" : "Economic well-being" }, { "name" : 68437, "group" : "Education" }, { "name" : 68437, "group" : "Economic well-being" }, { "name" : 68437, "group" : "Economic well-being" }, { "name" : 68518, "group" : "Political empowerment" }, { "name" : 68518, "group" : "Health" }, { "name" : 68518, "group" : "Political empowerment" }, { "name" : 68518, "group" : "Health" }, { "name" : 68536, "group" : "Social capital" }, { "name" : 68536, "group" : "Social capital" }, { "name" : 68569, "group" : "Economic well-being" }, { "name" : 68569, "group" : "Social capital" }, { "name" : 68569, "group" : "Culture" }, { "name" : 68569, "group" : "Political empowerment" }, { "name" : 68570, "group" : "Social capital" }, { "name" : 68570, "group" : "Political empowerment" }, { "name" : 68631, "group" : "Political empowerment" }, { "name" : 68631, "group" : "Economic well-being" }, { "name" : 68663, "group" : "Political empowerment" }, { "name" : 68663, "group" : "Social capital" }, { "name" : 68663, "group" : "Health" }, { "name" : 68663, "group" : "Culture" }, { "name" : 68668, "group" : "Social capital" }, { "name" : 68668, "group" : "Political empowerment" }, { "name" : 68668, "group" : "Social capital" }, { "name" : 68668, "group" : "Political empowerment" }, { "name" : 68669, "group" : "Social capital" }, { "name" : 68676, "group" : "Political empowerment" }, { "name" : 68676, "group" : "Health" }, { "name" : 68699, "group" : "Social capital" }, { "name" : 68699, "group" : "Political empowerment" }, { "name" : 68800, "group" : "Political empowerment" }, { "name" : 68800, "group" : "Economic well-being" }, { "name" : 68816, "group" : "Social capital" }, { "name" : 68866, "group" : "Political empowerment" }, { "name" : 68866, "group" : "Social capital" }, { "name" : 68901, "group" : "Economic well-being" }, { "name" : 68901, "group" : "Health" }, { "name" : 68901, "group" : "Education" }, { "name" : 68901, "group" : "Political empowerment" }, { "name" : 68901, "group" : "Social capital" }, { "name" : 68901, "group" : "Economic well-being" }, { "name" : 68901, "group" : "Health" }, { "name" : 68901, "group" : "Education" }, { "name" : 68901, "group" : "Political empowerment" }, { "name" : 68901, "group" : "Social capital" }, { "name" : 68902, "group" : "Social capital" }, { "name" : 68902, "group" : "Health" }, { "name" : 68902, "group" : "Social capital" }, { "name" : 68902, "group" : "Health" } ] ; 
+ var width = 900
+height = 600;
+
+var color = d3.scale.category20();
+
+var force = d3.layout.force()
+.nodes(d3.values(nodes))
+.links(links)
+.size([width, height])
+.linkDistance(50)
+.charge(-120)
+.on("tick", tick)
+.start();
+
+var svg = d3.select("body").append("svg")
+.attr("width", width)
+.attr("height", height);
+
+var link = svg.selectAll(".link")
+.data(force.links())
+.enter().append("line")
+.attr("class", "link")
+.style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+var node = svg.selectAll(".node")
+.data(force.nodes())
+.enter().append("g")
+.attr("class", "node")
+.style("fill", function(d) { return color(d.group); })
+.style("opacity", 0.9)
+.on("mouseover", mouseover)
+.on("mouseout", mouseout)
+.call(force.drag);
+
+node.append("circle")
+.attr("r", 6)
+
+node.append("svg:text")
+.attr("class", "nodetext")
+.attr("dx", 12)
+.attr("dy", ".35em")
+.text(function(d) { return d.name });
+
+function tick() {
+link
+.attr("x1", function(d) { return d.source.x; })
+.attr("y1", function(d) { return d.source.y; })
+.attr("x2", function(d) { return d.target.x; })
+.attr("y2", function(d) { return d.target.y; });
+
+node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+}
+
+function mouseover() {
+d3.select(this).select("circle").transition()
+.duration(750)
+.attr("r", 16);
+d3.select(this).select("text").transition()
+.duration(750)
+.attr("x", 13)
+.style("stroke-width", ".5px")
+.style("font", "17.5px serif")
+.style("opacity", 1);
+}
+
+function mouseout() {
+d3.select(this).select("circle").transition()
+.duration(750)
+.attr("r", 8);
+}
+
+</script>
+ </body>
